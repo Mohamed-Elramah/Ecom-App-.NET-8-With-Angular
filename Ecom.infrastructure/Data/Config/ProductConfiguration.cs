@@ -14,10 +14,10 @@ namespace Ecom.infrastructure.Data.Config
         public void Configure(EntityTypeBuilder<Product> builder)
         {
            builder.Property(x=>x.Name).IsRequired();
-            builder.Property(x=>x.Price).HasColumnType("decimal(18,2)");
+            builder.Property(x=>x.NewPrice).HasColumnType("decimal(18,2)");
             builder.Property(x=>x.Description).IsRequired();
             builder.HasData(
-                new Product { Id = 1, Name = "test", Description = "test", Price = 10, CategoryId = 1 }
+                new Product { Id = 1, Name = "test", Description = "test", NewPrice = 10, CategoryId = 1 }
                 );
         }
     }
