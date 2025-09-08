@@ -22,7 +22,7 @@ namespace Ecom.API.Controllers
                 var product = await work.ProductRepositry.GetAllAsync(
                     x=>x.Category,x=>x.Photos);
 
-                var result = mapper.Map<List<AddProductDTO>>(product);
+                var result = mapper.Map<List<ProductDTO>>(product);
                 if(product is null)
                     return BadRequest(new ResponseAPI(400));
                 return Ok(result);
@@ -90,7 +90,22 @@ namespace Ecom.API.Controllers
 
             }
         }
-        //[HttpPut("Delete-Product/{id}")]
+        [HttpDelete("Delete-Product/{Id}")]
+        public async Task<IActionResult> delete(int Id)
+        {
+            try
+            {
+                var product = await work.ProductRepositry
+                    .GetByIdAsync(Id,x=>x.Category,x=>x.Photos);
+                await work.ProductRepositry.DeleteAsync(product);
+                return Ok(new ResponseAPI(200, "Product Deleted"));
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(new ResponseAPI(400, ex.Message));
+            }
+        }
 
 
     }

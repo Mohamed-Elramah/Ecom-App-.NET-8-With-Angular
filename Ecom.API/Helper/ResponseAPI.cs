@@ -2,10 +2,10 @@
 {
     public class ResponseAPI
     {
-        public ResponseAPI(int statusCode, string message =null)
+        public ResponseAPI(int statusCode, string message = null)
         {
             StatusCode = statusCode;
-            Message = message;
+            Message = message ?? GetMassageFormStatusCode(statusCode);
         }
         private string GetMassageFormStatusCode(int statusCode)
         {
@@ -17,7 +17,7 @@
                 400 => "Bad Request",
                 401 => "Unauthorized",
                 403 => "Forbidden",
-                404 => "Not Found",
+                404 => "resource Not Found ",
                 500 => "Internal Server Error",
                 _ => "Unknown Status"
             };
